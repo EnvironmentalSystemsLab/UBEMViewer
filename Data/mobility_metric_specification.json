@@ -1,0 +1,91 @@
+[
+    {
+        "metric_name": "trip_volume_on_streets",
+        "metric_description": "The \"Street Mobility Dashboard\" metric measures the number of trips traversing particular street segments within the city. It analyzes several dimensions, including season, weekdays/weekends, times of day, travel modes, and activities at origin and destination. Its primary purpose of this metric is to identify traffic hotspots associated with various transportation modes and travel purposes during different time periods.",
+        "metric_format": "season_weekday_mode_timeofday_fromactivity_toactivity : value",
+        "metric_filter_options": {
+            "season": {
+                "0": "winter",
+                "1": "spring",
+                "2": "summer",
+                "3": "fall"
+            },
+            "weekday": {
+                "0": "weekend",
+                "1": "weekday"
+            },
+            "mode": {
+                "0": "walk",
+                "1": "bike",
+                "2": "drive",
+                "-1": "all"
+            },
+            "time of day": {
+                "0": "morning (12pm - 6am)",
+                "1": "breakfast (6am - 11am)",
+                "2": "lunch (11am - 3pm)",
+                "3": "afternoon (3pm - 5pm)",
+                "4": "dinner (5pm - 9pm)",
+                "5": "night (9pm - 12pm)",
+                "-1": "all"
+            },
+            "from activity": {
+                "0": "home",
+                "1": "work/school",
+                "2": "leisure",
+                "-1": "all"
+            },
+            "to activity": {
+                "0": "home",
+                "1": "work/school",
+                "2": "leisure",
+                "-1": "all"
+            }
+        }
+    },
+    {
+        "metric_name": "trip_volume_from_blocks",
+        "metric_description": "The \"Block Mobility Dashboard\" metric quantifies the number of trips originating from each Census Block within the city. It analyzes multiple dimensions, including season, weekdays/weekends, times of day, travel modes, and activities at origin and destination. The primary objective of this metric is to identify travel demands associated with different modes and activities during various time periods, specifically focusing on the locations where trips begin.",
+        "metric_format": "season_weekday_mode_timeofday_fromactivity_toactivity : value",
+        "metric_filter_options": {
+            "season": {
+                "0": "winter",
+                "1": "spring",
+                "2": "summer",
+                "3": "fall"
+            },
+            "weekday": {
+                "0": "weekend",
+                "1": "weekday"
+            },
+            "mode": {
+                "0": "walk",
+                "1": "bike",
+                "2": "drive",
+                "3": "public transit",
+                "-1": "all"
+            },
+            "time of day": {
+                "0": "morning (12pm - 6am)",
+                "1": "breakfast (6am - 11am)",
+                "2": "lunch (11am - 3pm)",
+                "3": "afternoon (3pm - 5pm)",
+                "4": "dinner (5pm - 9pm)",
+                "5": "night (9pm - 12pm)",
+                "-1": "all"
+            },
+            "from activity": {
+                "0": "home",
+                "1": "work/school",
+                "2": "leisure",
+                "-1": "all"
+            },
+            "to activity": {
+                "0": "home",
+                "1": "work/school",
+                "2": "leisure",
+                "-1": "all"
+            }
+        }
+    }
+]
