@@ -99,9 +99,9 @@ function Legend({ colorScale }) {
 function MobilityScenario({ mapRef, setBuildingDataUrl, setIthacaEnergyUrl, BUILDING_DATA_URL,BUILDING_DATA_URL_INITIAL, ITHACA_ENERGY_URL_INITIAL }) {
   const [scenarios, setScenarios] = useState([
     { id: 1, name: 'Baseline', data: [{ name: 'Heating', value: 39973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] },
-    { id: 2, name: 'Residential Electrified', data: [{ name: 'Heating', value: 32973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] },
-    { id: 3, name: 'Commercial Electrified', data: [{ name: 'Heating', value: 22973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] },
-    { id: 4, name: 'Full Electrified', data: [{ name: 'Heating', value: 15973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] }
+    { id: 2, name: 'ResidentialElectrified', data: [{ name: 'Heating', value: 32973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] },
+    { id: 3, name: 'CommercialElectrified', data: [{ name: 'Heating', value: 22973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] },
+    { id: 4, name: 'FullElectrified', data: [{ name: 'Heating', value: 15973.0 }, { name: 'Cooling', value: 4630.0 }, { name: 'Equipment', value: 3372.0 }, { name: 'Lighting', value: 1810.0 }, { name: 'HotWater', value: 4900.0 }, { name: 'PV', value: 0.0 }] }
   ]);
   const [selectedScenario, setSelectedScenario] = useState(null);
 

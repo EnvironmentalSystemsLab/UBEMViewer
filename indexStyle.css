@@ -107,13 +107,15 @@ body {
 /* Adjust the title font size for smaller screens */
 
 .homepage-title {
-  position:absolute;
+  position: absolute;       
+  top: 25%;            
+  left: 50%;              
+  transform: translate(-50%, -50%); 
   font-family: 'Open Sans', Arial, sans-serif;
   font-weight: 900;
-  left: 20px;
- margin-top: 15px;
-  font-size: 28px;
+  font-size: 72px;
 }
+
 
 .title {
   font-family: 'Open Sans', Arial, sans-serif;

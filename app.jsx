@@ -4,21 +4,13 @@ import ReactDOM from 'react-dom';
 
 // Import from other pacakges
 import React, { useRef, useEffect, useState } from 'react';
-
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import sgMail from '@sendgrid/mail';
-import Modal from '@mui/material/Modal';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-
 
 // Import from other classes
 import { getColorScale } from "./Containers/MapLogic/coloringLogic"
-
 import { roundValue } from "./Containers/MapLogic/legendLogic"
-
-import { openPopup } from "./Containers/MapLogic/popupLogic"
 
 import {
   clearSelectedAreas,
@@ -50,27 +42,20 @@ import {
 
 // Import from other modules
 import HomePage from './ReturnBlock/HomePage';
-import SelectionTutorial from './ReturnBlock/SelectionTutorial';
 import DashboardSelector from './ReturnBlock/DashboardSelector';
 import BuildingSelection from './ReturnBlock/BuildingSelection'
 import FeederSelection from './ReturnBlock/FeederSelection'
 import FirstMobilitySelection from './ReturnBlock/FirstMobilitySelection'
 import SecondMobilitySelection from './ReturnBlock/SecondMobilitySelection'
-import LoginPopup from './ReturnBlock/LoginPopup'
 import MobilityTabSwitch from './ReturnBlock/MobilityTabSwitch'
 import BuildingTabSwitch from './ReturnBlock/BuildingTabSwitch'
 import FeederTabSwitch from './ReturnBlock/FeederTabSwitch'
 import MobilityScenario from './ReturnBlock/MobilityScenario'
 import ImportGeojson from './ReturnBlock/ImportGeojson'
-
-
+import DatasetManagement from './ReturnBlock/DatasetManagement'
 
 // Tokens for accesing Mapbox and email Service
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3g2NCIsImEiOiJjbGkzd2E1dmsxMzNoM2twY2p2azF0bGVlIn0.t_v73kaAMUtoGBPESpw3uA';
-
-sgMail.setApiKey('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');
-
-//import { sendEmail } from "./MapLogic/contactManagement"
 
 // Source data 
 const ITHACA_BOUNDARY_URL =
@@ -123,7 +108,7 @@ function App() {
   const lightMode = 'mapbox://styles/kx64/cljdd8xr6003l01qkbxctho6q';
 
   // for changing tile and info and modular contianer when switching between different city API
-  const [title, setTitle] = useState('Urbano.io');
+  const [title, setTitle] = useState('UBEM Viewer');
   const [cityInfoText, setCityInfoText] = useState('');
 
   // container for manage sidebar module's visivility.
@@ -143,6 +128,18 @@ function App() {
   // Variables For manage layer and layer selector's visibility 
   const [displayingLayers, setDisplayingLayers] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Variables for dataset management
+  const [files, setFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const addFile = (newFile) => {
+    setFiles(prevFiles => [...prevFiles, newFile]);
+  };
+
+  const deleteFile = (index) => {
+    setFiles(prevFiles => prevFiles.filter((_, i) => i !== index));
+  };
 
   // Variables For manage selected areas
   const sAreas = useRef(new Set()); // Set to store selected areas
@@ -191,7 +188,7 @@ function App() {
         map.setLayoutProperty(layerId, 'visibility', 'none');
       });
 
-      setTitle('Urbano.io');
+      setTitle('UBEM Viewer');
 
       setBuildingContainerVisible(false);
       setMobilityContainerVisible(false);
@@ -230,7 +227,7 @@ function App() {
         map.setLayoutProperty(layerId, 'visibility', 'visible');
       });
 
-      setTitle('Urbano.io / Ithaca');
+      setTitle('UBEM Viewer / Ithaca');
       setCityInfoText('Ithaca /ˈɪθəkə/ is a city and the county seat of Tompkins County, New York, United States. Situated on the southern shore of Cayuga Lake in the Finger Lakes region of New York, Ithaca is the largest community in the Ithaca metropolitan statistical area. It is named after the Greek island of Ithaca.')
 
 
@@ -932,7 +929,7 @@ function App() {
             'circle-color': "rgba(254, 178, 76, 0.85)",
             'circle-radius': 40,
           },
-          "layout": { "visibility": 'visible' },
+          "layout": { "visibility": 'none' },
         });
 
         map.addLayer({
@@ -945,6 +942,7 @@ function App() {
             'text-size': 18, // Set the font size for the text
 
           },
+          "layout": { "visibility": 'none' },
 
         });
 
@@ -1013,7 +1011,7 @@ function App() {
             map.setLayoutProperty(layerId, 'visibility', 'visible');
           });
 
-          setTitle('Urbano.io / Ithaca');
+          setTitle('UBEM Viewer / Ithaca');
           setCityInfoText('Ithaca /ˈɪθəkə/ is a city and the county seat of Tompkins County, New York, United States. Situated on the southern shore of Cayuga Lake in the Finger Lakes region of New York, Ithaca is the largest community in the Ithaca metropolitan statistical area. It is named after the Greek island of Ithaca.')
 
 
@@ -1772,13 +1770,10 @@ function energyFinish(event, features) {
 
         <div className="title-container">
 
-          {/* <img className="logo-image" src="./Image/LogoDraftV2.png" width="50" /> */}
           <div className="title">
-            <p onClick={handleTitleClick}>{title}</p>
-          </div>
-          
-          <p className='version-text'> v.2.0411</p>
-          <div><ImportGeojson onDataImport={setBuildingDataUrl}/></div>
+            <p onClick={handleTitleClick}>{title}</p> 
+          </div>    
+         
         </div>
         
 
@@ -1793,7 +1788,7 @@ function energyFinish(event, features) {
             <HomePage handleDigitalTwinClick={handleDigitalTwinClick} />
           </div>
         )}
-
+          {/*
         {generalContainerVisible && (
           <div>
             <DashboardSelector
@@ -1803,6 +1798,7 @@ function energyFinish(event, features) {
             />
           </div>
         )}
+         */}
 
         {notUsingContainerVisible && (
           <div className="city-info">{cityInfoText}</div>
@@ -1810,14 +1806,28 @@ function energyFinish(event, features) {
 
         {generalContainerVisible && (
            <div class="hr-container">
-           <span class="third-title">Scenerio Selector</span>
-           <hr class="sidebar-divider" />
+           <span class="summary-title">Dataset Management</span>  
          </div>
           )}
+
+{generalContainerVisible && (      
+           <div>
+            <DatasetManagement
+              onDataImport={setBuildingDataUrl}
+              files={files} 
+              setFiles={setFiles}
+              deleteFile={deleteFile}
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile} 
+            />
+          </div>   
+          )}
+
 
         {mobilityContainerVisible && (
           <div>
             <MobilityScenario 
+            selectedFileName={selectedFile ? selectedFile.name : null}
             mapRef={mapRef}
             setBuildingDataUrl={setBuildingDataUrl}
             setIthacaEnergyUrl={setIthacaEnergyUrl}
@@ -1886,19 +1896,10 @@ function energyFinish(event, features) {
           </div>
         )}
  
-       
-    {/*     {notUsingContainerVisible && (
-          <button className="contact-button" onClick={sendEmail}>Contact</button>
-        )} */}
-      
         {(homeContainerVisible || generalContainerVisible) && (
           <div style={{ margin: '20px' }}>
           </div>
         )}
-   
-       {/*  {notUsingContainerVisible && (
-          <button className="contact-button" onClick={exportSelectedAreas}>Export / Import</button>
-        )} */}
 
         {mobilityContainerVisible && (
           generateMobilitySenarioBarGraph(sAreas, mapRef) ,
@@ -1927,13 +1928,25 @@ function energyFinish(event, features) {
 
         <div className="map-container" ref={mapContainer}></div>
 
-        {(homeContainerVisible) && (
-          <div className='homepage-title'>Urbano.io Map</div>
+        {(homeContainerVisible) && (    
+          <div className='homepage-title'>UBEM Viewer</div>    
         )}
 
-          <div className="login-container">
-          <LoginPopup  />
-          </div>
+        {(homeContainerVisible) && ( 
+          <div>
+            <ImportGeojson 
+              onDataImport={setBuildingDataUrl}
+              addFile={addFile}
+              mapRef={mapRef}
+              setTitle={setTitle}
+              setDisplayingLayers={setDisplayingLayers}
+              setHomeContainerVisible={setHomeContainerVisible}
+              setGeneralContainerVisible={setGeneralContainerVisible}
+              />
+          </div>        
+         )}
+
+    
 
         {(mobilityContainerVisible || energyContainerVisible) && (
           <div className="main-legend-container">{generateLegend(displayingLayers)}</div>
@@ -1977,85 +1990,6 @@ function energyFinish(event, features) {
                   )}
                 </div>
           )}
-
-
- {/*
-        {(mobilityContainerVisible || energyContainerVisible) && (
-          <div className="groupSelection-container">
-            
-            {generalContainerVisible && (
-            <div class="hr-container">
-              <span class="third-title">Building Group Selector</span>
-
-            </div>
-  
-          )}
-
-{generalContainerVisible && (
-  <div style={{ margin: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div className='groupSelection-min'>{parseInt(minBuildingValue)}</div>
-      <Range
-        step={1}
-        min={parseInt(minBuildingValue)}
-        max={parseInt(maxBuildingValue)}
-        values={selectionValues}
-        onChange={(values) => setSelectionValues(values)}
-        renderTrack={({ props, children }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: '2px',
-              width: '200px',
-              backgroundColor: '#ccc',
-              position: 'relative',
-              marginTop: '25px', // Adjust as needed
-            }}
-          >
-            {children}
-          </div>
-        )}
-        renderThumb={({ props, index }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: '10px',
-              width: '20px',
-              backgroundColor: '#999',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'absolute', // Ensuring absolute positioning
-         
-            }}
-          >
-            <div style={{
-              position: 'absolute',
-              top: index === 0 ? '-30px' : '15px', // Adjust label position
-              left: '50%',
-              transform: 'translateX(-50%)',
-            
-              padding: '2px 5px',
-              fontSize: '12px',
-              borderRadius: '4px',
-              whiteSpace: 'nowrap'
-            }}>
-              {selectionValues[index]}
-            </div>
-          </div>
-        )}
-      />
-      <div className='groupSelection-max'>{parseInt(maxBuildingValue)}</div>
-    </div>
-      <button className="groupSelect-button" onClick={handleSubmit}>Select</button>
-  </div>                 
-                </div>
-           )}
-           
-           )}*/}
-          
 
       </div>
     </div>
