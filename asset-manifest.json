@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/UBEMViewer/static/css/main.fd669a23.css",
-    "main.js": "/UBEMViewer/static/js/main.6650075b.js",
+    "main.js": "/UBEMViewer/static/js/main.213869dc.js",
     "static/js/453.1b384830.chunk.js": "/UBEMViewer/static/js/453.1b384830.chunk.js",
     "index.html": "/UBEMViewer/index.html",
     "main.fd669a23.css.map": "/UBEMViewer/static/css/main.fd669a23.css.map",
-    "main.6650075b.js.map": "/UBEMViewer/static/js/main.6650075b.js.map",
+    "main.213869dc.js.map": "/UBEMViewer/static/js/main.213869dc.js.map",
     "453.1b384830.chunk.js.map": "/UBEMViewer/static/js/453.1b384830.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fd669a23.css",
-    "static/js/main.6650075b.js"
+    "static/js/main.213869dc.js"
   ]
 }
